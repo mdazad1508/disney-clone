@@ -16,6 +16,10 @@ body {
   padding: 0;
 }
 
+.head{
+  color:white;
+}
+
 a {
   color: #f9f9f9;
   text-decoration: none;

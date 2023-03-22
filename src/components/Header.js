@@ -61,9 +61,13 @@ const Header = (props) => {
     });
   };
 
+  const logoClick=()=>{
+    navigate("/home");
+  }
+
   return (
     <Nav>
-      <Logo>
+      <Logo onClick={logoClick}>
         <img src="/images/logo.svg" alt="" />
       </Logo>
 

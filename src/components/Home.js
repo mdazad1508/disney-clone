@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ImageSlider from "./ImageSlider";
 import Viewers from "./Viewers";
@@ -6,7 +6,7 @@ import Recommends from "./Recommends";
 import NewDisney from "./NewDisney";
 import Trending from "./Trending";
 import { useEffect } from "react";
-import { selectRecommended, setMovie } from "../features/movie/movieSlice";
+import {  setMovie } from "../features/movie/movieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserName } from "../features/user/userSlice";
 import db from "../firebase";
@@ -18,16 +18,19 @@ import Originals from "./Orignals";
 const Home = (props) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
+  
+
+  useEffect(() => {
+     
   let recommends = [];
   let newDisneys = [];
   let originals = [];
   let trending = [];
 
-  useEffect(() => {
     const foo = async () => {
       const colRef = collection(db, "movies");
       const snapshot = await getDocs(colRef);
-      snapshot.docs.map((doc) => {
+      snapshot.docs.forEach((doc) => {
         switch (doc.data().type) {
           case "recommend":
             recommends = [...recommends, { id: doc.id, ...doc.data() }];
@@ -44,8 +47,13 @@ const Home = (props) => {
           case "trending":
             trending = [...trending, { id: doc.id, ...doc.data() }];
             break;
+          default:
+            console.log("nothing matched");
+            break;
         }
-      });
+        
+    });
+     
       dispatch(
         setMovie({
           recommend: recommends,
@@ -56,7 +64,7 @@ const Home = (props) => {
       );
     };
     foo();
-  }, [userName]);
+  }, [userName,dispatch]);
 
   return (
     <Container>
