@@ -1,6 +1,6 @@
 # Deployed at firebase 
 
-Link : https://disney-clone-80092.web.app/detail/DghQY4N3gG6F7d7HC5MB
+Link : https://disney-clone-80092.web.app/
 
 
 
